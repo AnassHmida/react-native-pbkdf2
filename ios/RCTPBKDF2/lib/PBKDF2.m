@@ -28,10 +28,10 @@
                     passwordData.length,
                     saltData.bytes,
                     saltData.length,
-                    kCCPRFHmacAlgSHA512,
-                    iterations,
+                    kCCHmacAlgSHA1,
+                    1000,
                     hashKeyData.mutableBytes,
-                    hashKeyData.length);
+                                      48);
 
     if (status == kCCParamError) {
         NSLog(@"Key derivation error");
