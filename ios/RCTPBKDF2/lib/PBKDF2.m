@@ -17,9 +17,9 @@
     // Data of String to generate Hash key(hexa decimal string).
     NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
     NSData *saltData = [salt dataUsingEncoding:NSUTF8StringEncoding];
-
+    uint keySize = kCCKeySizeAES128;
     // Hash key (hexa decimal) string data length.
-    NSMutableData *hashKeyData = [NSMutableData dataWithLength:CC_SHA512_DIGEST_LENGTH];
+    NSMutableData *hashKeyData = [NSMutableData dataWithLength:48];
 
     // Key Derivation using PBKDF2 algorithm.
     int status = CCKeyDerivationPBKDF(
@@ -28,7 +28,7 @@
                     passwordData.length,
                     saltData.bytes,
                     saltData.length,
-                    kCCHmacAlgSHA1,
+                    kCCPRFHmacAlgSHA1,
                     1000,
                     hashKeyData.mutableBytes,
                                       48);
